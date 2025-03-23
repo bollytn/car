@@ -2,7 +2,7 @@ import { UserButton, useUser } from '@clerk/clerk-react'
 import React from 'react'
 import { Button } from './ui/button'
 
-const header = () => {
+const Header = () => {
 
     const { user, isSignedIn } = useUser()
 
@@ -20,7 +20,7 @@ const header = () => {
             {isSignedIn ?
             <div className='flex items-center gap-4'>
                 <UserButton/>
-                <Button>Submit Listing</Button>
+                <Button>Sign out</Button>
             </div> 
             :
             <Button>Submit Listing</Button>
@@ -29,4 +29,4 @@ const header = () => {
     )
 }
 
-export default header
+export default Header
