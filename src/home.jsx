@@ -3,6 +3,7 @@ import { Button } from './components/ui/button'
 import { SignInButton } from '@clerk/clerk-react'
 
 import Header from './components/Header'
+import Hero from './components/Hero'
 
 const home = () => {
   return (
@@ -12,6 +13,7 @@ const home = () => {
         <Button>Sign In</Button>
       </SignInButton>*/}
       <Header />
+      <Hero />
     </div>
   )
 }
