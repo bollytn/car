@@ -13,39 +13,38 @@ import { IoSearchOutline } from "react-icons/io5";
 const Search = () => {
     return (
         <div className="md:flex flex-col bg-white rounded-md items-center px-5 gap-10 w-[550px] lg:w-[60%] md:rounded-full md:flex-row p-2 md:p-5">
+
             <Select>
-                <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg md:border-none">
+                <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
                     <SelectValue placeholder="Theme" />
                 </SelectTrigger>
-                <SelectContent className="w-[180px] mt-4">
+                <SelectContent className="w-[180px] -mt-4 ml-16 md:ml-0 md:mt-4">
+                    <SelectItem value="light">Light</SelectItem>
+                    <SelectItem value="dark">Dark</SelectItem>
+                    <SelectItem value="system">System</SelectItem>
+                </SelectContent>
+            </Select>
+          
+            <Separator orientation="vertical" className="bg-gray-300 hidden md:block" />
+          
+            <Select>
+                <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
+                    <SelectValue placeholder="Theme" />
+                </SelectTrigger>
+                <SelectContent className="w-[180px] -mt-4 ml-16 md:ml-0 md:mt-4">
                     <SelectItem value="light">Light</SelectItem>
                     <SelectItem value="dark">Dark</SelectItem>
                     <SelectItem value="system">System</SelectItem>
                 </SelectContent>
             </Select>
 
-          
-            <Separator orientation="vertical" className="bg-gray-300 " />
-          
+            <Separator orientation="vertical" className="bg-gray-300 hidden md:block"/>
 
             <Select>
-                <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg md:border-none">
+                <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
                     <SelectValue placeholder="Theme" />
                 </SelectTrigger>
-                <SelectContent className="w-[180px] mt-4">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
-                </SelectContent>
-            </Select>
-
-            <Separator orientation="vertical" className="bg-gray-300"/>
-
-            <Select>
-                <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg md:border-none">
-                    <SelectValue placeholder="Theme" />
-                </SelectTrigger>
-                <SelectContent className="w-[180px] mt-4">
+                <SelectContent className="w-[180px] -mt-4 ml-16 md:ml-0 md:mt-4">
                     <SelectItem value="light">Light</SelectItem>
                     <SelectItem value="dark">Dark</SelectItem>
                     <SelectItem value="system">System</SelectItem>
