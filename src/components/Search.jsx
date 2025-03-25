@@ -16,12 +16,11 @@ const Search = () => {
 
             <Select>
                 <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
-                    <SelectValue placeholder="Theme" />
+                    <SelectValue placeholder="Cars" />
                 </SelectTrigger>
                 <SelectContent className="w-full -mt-4 ml-16 md:ml-0 md:mt-6">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    <SelectItem value="light">New</SelectItem>
+                    <SelectItem value="dark">Old</SelectItem>
                 </SelectContent>
             </Select>
           
@@ -29,7 +28,7 @@ const Search = () => {
           
             <Select>
                 <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
-                    <SelectValue placeholder="Theme" />
+                    <SelectValue placeholder="Cars Makes" />
                 </SelectTrigger>
                 <SelectContent className="w-full -mt-4 ml-16 md:ml-0 md:mt-6">
                     <SelectItem value="light">Light</SelectItem>
