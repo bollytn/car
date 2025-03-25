@@ -18,7 +18,7 @@ const Search = () => {
                 <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
                     <SelectValue placeholder="Theme" />
                 </SelectTrigger>
-                <SelectContent className="w-[180px] -mt-4 ml-16 md:ml-0 md:mt-4">
+                <SelectContent className="w-full -mt-4 ml-16 md:ml-0 md:mt-4">
                     <SelectItem value="light">Light</SelectItem>
                     <SelectItem value="dark">Dark</SelectItem>
                     <SelectItem value="system">System</SelectItem>
@@ -31,7 +31,7 @@ const Search = () => {
                 <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
                     <SelectValue placeholder="Theme" />
                 </SelectTrigger>
-                <SelectContent className="w-[180px] -mt-4 ml-16 md:ml-0 md:mt-4">
+                <SelectContent className="w-full -mt-4 ml-16 md:ml-0 md:mt-4">
                     <SelectItem value="light">Light</SelectItem>
                     <SelectItem value="dark">Dark</SelectItem>
                     <SelectItem value="system">System</SelectItem>
@@ -44,14 +44,14 @@ const Search = () => {
                 <SelectTrigger className="w-full outline-none focus:outline-none shadow-none text-lg border-none">
                     <SelectValue placeholder="Theme" />
                 </SelectTrigger>
-                <SelectContent className="w-[180px] -mt-4 ml-16 md:ml-0 md:mt-4">
+                <SelectContent className="w-full -mt-4 ml-16 md:ml-0 md:mt-4">
                     <SelectItem value="light">Light</SelectItem>
                     <SelectItem value="dark">Dark</SelectItem>
                     <SelectItem value="system">System</SelectItem>
                 </SelectContent>
             </Select>
-            <div>
-            <IoSearchOutline className="text-xl text-gray-400"/>
+            <div className="md:-ml-6">
+            <IoSearchOutline className="text-[50px] bg-primary rounded-full p-3 cursor-pointer text-white font-bold hover:scale-105 transition-all duration-300"/>
             </div>
         </div>
     )
