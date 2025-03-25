@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <div className="flex justify-between items-center p-5 shadow-sm">
-            <img src="/logo.svg" alt="car" width={50} height={50} />
+            <img src="/car.svg" alt="car" width={100} height={100} className='object-contain' />
 
             <ul className='hidden md:flex  gap-16'>
                 <li className='font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary'>Home</li>
@@ -20,10 +20,10 @@ const Header = () => {
             {isSignedIn ?
             <div className='flex items-center gap-4'>
                 <UserButton/>
-                <Button>Sign out</Button>
+                <Button className="text-white">Sign out</Button>
             </div> 
             :
-            <Button>Submit Listing</Button>
+            <Button className="text-white">Submit Listing</Button>
 }   
         </div>
     )
