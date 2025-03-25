@@ -20,10 +20,10 @@ const Header = () => {
             {isSignedIn ?
             <div className='flex items-center gap-4'>
                 <UserButton/>
-                <Button className="text-white">Sign out</Button>
+                <Button className="text-white linear">Sign out</Button>
             </div> 
             :
-            <Button className="text-white">Submit Listing</Button>
+            <Button className="text-white linear">Submit Listing</Button>
 }   
         </div>
     )

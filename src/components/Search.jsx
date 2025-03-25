@@ -51,7 +51,7 @@ const Search = () => {
                 </SelectContent>
             </Select>
             <div className="md:-ml-6">
-            <IoSearchOutline className="text-[50px] bg-primary rounded-full p-3 cursor-pointer text-white font-bold hover:scale-105 transition-all duration-300"/>
+            <IoSearchOutline className="text-[50px] linear rounded-full p-3 cursor-pointer text-white font-bold hover:scale-105 transition-all duration-300"/>
             </div>
         </div>
     )

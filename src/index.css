@@ -14,3 +14,6 @@ body {
   height: 100%;
   width: 100%;
 }
+.linear {
+  background: linear-gradient(to bottom,#01B3F3, #0463CD);
+}
