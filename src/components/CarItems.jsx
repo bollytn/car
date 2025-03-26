@@ -5,15 +5,17 @@ import { Separator } from './ui/separator';
 import { LuFuel } from "react-icons/lu";
 import { TbBrandSpeedtest } from "react-icons/tb";
 import { GiGearStickPattern } from "react-icons/gi";
+import { MdOpenInNew } from "react-icons/md";
 
 const CarItems = ({ car }) => {
   return (
-    <div>
+    <div className='rounded-xl bg-white border hover:shadow-md cursor-pointer'>
+      <h2 className='absolute m-2 bg-primary px-2 rounded-full text-sm text-white'>New</h2>
       <img src={car?.image} alt={car.name} width={300} height={250} className='rounded-t-xl' />
       <div className='p-4'>
-        <h2 className='font-bold text-black text-sm text-center'>{car?.name}</h2>
+        <h2 className='font-bold text-black text-sm mb-2'>{car?.name}</h2>
 
-        <Separator className=' text-blue-500' />
+        <Separator className="linear_line" />
 
         <div className='grid grid-cols-3 mt-5 text-[12px]'>
           <div className='flex flex-col items-center'>
@@ -31,8 +33,18 @@ const CarItems = ({ car }) => {
             <h2>{car.gearType}</h2>
           </div>
         </div>
+
+        <Separator className="linear_line my-3" />
+
+        <div className='flex items-center justify-between text-sm'>
+          <h2 className='font-bold '>${car.price}</h2>
+          <h2 className='text-secondary text-sm flex items-center gap-2'>
+            Views Details
+            <MdOpenInNew />
+          </h2>
+        </div>
       </div>
-    </div>
+    </div >
   )
 }
 
