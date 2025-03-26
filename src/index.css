@@ -17,3 +17,9 @@ body {
 .linear {
   background: linear-gradient(to bottom,#01B3F3, #0463CD);
 }
+.iconColor {
+  font-size: 1.125rem /* 18px */;
+  line-height: 1.75rem /* 28px */;
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity, 1)) /* #3b82f6 */;
+}
