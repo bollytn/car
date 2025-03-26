@@ -32,7 +32,7 @@ const Search = () => {
                 </SelectTrigger>
                 <SelectContent className="w-full -mt-4 ml-16 md:ml-0 md:mt-6">
                     {/* Add car makes */}
-                    {Data.CarsMakes.map((maker) => (
+                    {Data.CarMakes.map((maker) => (
                         <SelectItem key={maker.id} value={maker.name}>{maker.name}</SelectItem>
                     ))}
                 </SelectContent>
@@ -47,12 +47,12 @@ const Search = () => {
                 <SelectContent className="w-full -mt-4 ml-16 md:ml-0 md:mt-6">
                    {/* Add pricing */}
                    {Data.Pricing.map((price) => (
-                        <SelectItem key={price.id} value={price.ammount}>{price.ammount}</SelectItem>
+                        <SelectItem key={price.id} value={price.amount}>{price.amount}</SelectItem>
                     ))}
                 </SelectContent>
             </Select>
             <div className="md:-ml-10 flex justify-center">
-            <IoSearchOutline className="text-[50px] linear rounded-full p-3 cursor-pointer text-white font-bold hover:scale-105 transition-all duration-300" />
+            <IoSearchOutline className="text-[45px] linear rounded-full p-3 md:text[50px] md:p-2 cursor-pointer text-white font-bold hover:scale-105 transition-all duration-300" />
             </div>
         </div>
     )
