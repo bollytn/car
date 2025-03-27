@@ -12,9 +12,12 @@ const home = () => {
   return (
     <div>
 
-      <SignInButton mode='modal' forceRedirectUrl='/'>
-        <Button >Sign In</Button>
-      </SignInButton>
+      <div className='flex justify-center items-center'>
+        <SignInButton mode='modal' forceRedirectUrl='/'>
+          <Button >Sign In</Button>
+        </SignInButton>
+      </div>
+
       <Header />
       <Hero />
       <Category />
