@@ -16,6 +16,7 @@ body {
 }
 .linear {
   background: linear-gradient(to bottom,#01B3F3, #0463CD);
+  color: white;
 }
 .linear_line {
   background: linear-gradient(to right, #01B3F3, #0463CD);

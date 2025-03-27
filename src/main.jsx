@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './home.jsx'
 import Contact from './contact.jsx'
+import Profile from './profile/index.jsx'
+import AddListing from './add_listing/index.jsx'
 
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
     path: '/contact',
     element: <Contact />,
   },
+  {
+    path: '/profile',
+    element: <Profile />,
+  },
+  {
+    path: '/add_listing',
+    element: <AddListing />,
+  }
 ])
 
 
