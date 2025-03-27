@@ -1,9 +1,14 @@
 import { Input } from "@/components/ui/input"
 import PropTypes from "prop-types"
-const InputField = ({ item }) => {
+const InputField = ({ item, handleInputChange }) => {
     return (
         <div>
-            <Input type={item?.fieldType} name={item?.name} required={item?.required} className="w-full" />
+            <Input type={item?.fieldType}
+                name={item?.name}
+                required={item?.required}
+                className="w-full"
+                onChange={e => handleInputChange(item.name, e.target.value)}
+            />
         </div>
     )
 }
@@ -11,10 +16,20 @@ const InputField = ({ item }) => {
 // PropTypes for type checking and better developer experience
 InputField.propTypes = {
     item: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        fieldType: PropTypes.string.isRequired,
-        required: PropTypes.bool.isRequired,
-    }).isRequired,
+        name: PropTypes.string,
+        fieldType: PropTypes.string,
+        required: PropTypes.bool,
+    }),
+    handleInputChange: PropTypes.func,
+}
+
+// PropTypes for type checking and better developer experience
+InputField.propTypes = {
+    item: PropTypes.shape({
+        name: PropTypes.string,
+        fieldType: PropTypes.string,
+        required: PropTypes.bool,
+    }),
 }
 
 export default InputField

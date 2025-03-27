@@ -8,10 +8,10 @@ import {
 
 import PropTypes from 'prop-types';
 
-const SelectField = ({ item }) => {
+const SelectField = ({ item, handleInputChange }) => {
     return (
         <div>
-            <Select>
+            <Select onValueChange={(value) => handleInputChange(item.name, value)}>
                 <SelectTrigger className="w-full">
                     <SelectValue placeholder={item?.placeholder} />
                 </SelectTrigger>
@@ -29,8 +29,12 @@ const SelectField = ({ item }) => {
 }
 
 SelectField.propTypes = {
+    handleInputChange: PropTypes.func,
     item: PropTypes.shape({
         placeholder: PropTypes.string,
+        name: PropTypes.string,
+        value: PropTypes.string,
+        required: PropTypes.bool,
         options: PropTypes.arrayOf(PropTypes.string),
     }),
 };

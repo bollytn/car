@@ -1,4 +1,5 @@
 import Header from "@/components/Header"
+import { useState } from "react"
 
 import InputField from "./components/InputField"
 import SelectField from "./components/SelectField"
@@ -12,6 +13,16 @@ import CheckBoxField from "./components/CheckBoxField"
 import { Button } from "@/components/ui/button"
 
 const AddListing = () => {
+    const [formData, setFormData] = useState([])
+    const handleInputChange = (name, value) => {
+        {/*setFormData(prevData => [...prevData, { name, value }])*/ }
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value,
+        }));
+        console.log(formData);
+
+    }
     return (
         <div>
             <Header />
@@ -22,17 +33,16 @@ const AddListing = () => {
                     <div >
                         <h2 className="font-medium text-xl mb-6">Car Details</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {
-                                carDetails.carDetails.map((item, index) => (
-                                    <div key={index}>
-                                        <label className="text-sm">{item?.label} {item.required && <span className="text-red-500">*</span>}</label>
-                                        {(item.fieldType == 'text' || item.fieldType == 'number')
-                                            ? <InputField item={item} />
-                                            : item.fieldType == 'dropdown' ? <SelectField item={item} />
-                                                : item.fieldType == 'textarea' ? <TextAreaField item={item} />
-                                                    : null}
-                                    </div>
-                                ))
+                            {carDetails.carDetails.map((item, index) => (
+                                <div key={index}>
+                                    <label className="text-sm">{item?.label} {item.required && <span className="text-red-500">*</span>}</label>
+                                    {(item.fieldType == 'text' || item.fieldType == 'number')
+                                        ? <InputField item={item} handleInputChange={handleInputChange} />
+                                        : item.fieldType == 'dropdown' ? <SelectField item={item} handleInputChange={handleInputChange} />
+                                            : item.fieldType == 'textarea' ? <TextAreaField item={item} handleInputChange={handleInputChange} />
+                                                : null}
+                                </div>
+                            ))
                             }
                         </div>
                     </div>
@@ -43,7 +53,7 @@ const AddListing = () => {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                             {features.features.map((item, index) => (
                                 <div key={index} className="flex items-center gap-2">
-                                    <CheckBoxField item={item} />
+                                    <CheckBoxField item={item} handleInputChange={handleInputChange} />
                                     <h2>{item.label}</h2>
                                 </div>
                             ))}
