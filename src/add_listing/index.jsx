@@ -2,6 +2,7 @@ import Header from "@/components/Header"
 import carDetails from "./../data/carDetails.json"
 import InputField from "./components/InputField"
 import SelectField from "./components/SelectField"
+import TextAreaField from "./components/TextAreaField"
 const AddListing = () => {
     return (
         <div>
@@ -20,7 +21,8 @@ const AddListing = () => {
                                         {(item.fieldType == 'text' || item.fieldType == 'number')
                                             ? <InputField item={item} />
                                             : item.fieldType == 'dropdown' ? <SelectField item={item} />
-                                                : null}
+                                                : item.fieldType == 'textarea' ? <TextAreaField item={item} />
+                                                    : null}
                                     </div>
                                 ))
                             }
