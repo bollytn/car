@@ -22,12 +22,12 @@ const Header = () => {
                 <div className='flex items-center gap-4'>
                     <UserButton />
                     <Link to='/profile'>
-                        <Button className="linear">Sign out</Button>
+                        <Button className="linear">Submit Listing</Button>
                     </Link>
 
                 </div>
                 :
-                <Button className="linear">Submit Listing</Button>
+                <Button className="linear"> Sign in </Button>
             }
         </div>
     )

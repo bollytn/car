@@ -1,5 +1,5 @@
-{/*import { Button } from './components/ui/button'
-import { SignInButton } from '@clerk/clerk-react'*/}
+import { Button } from './components/ui/button'
+import { SignInButton } from '@clerk/clerk-react'
 
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -11,10 +11,10 @@ import Footer from './components/Footer'
 const home = () => {
   return (
     <div>
-      {/*<Button>Sign In</Button>*/}
-      {/*<SignInButton mode='modal' forceRedirectUrl='/'>
-        <Button>Sign In</Button>
-      </SignInButton>*/}
+
+      <SignInButton mode='modal' forceRedirectUrl='/'>
+        <Button >Sign In</Button>
+      </SignInButton>
       <Header />
       <Hero />
       <Category />
