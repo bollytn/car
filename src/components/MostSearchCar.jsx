@@ -11,7 +11,6 @@ import {
 
 
 const MostSearchCar = () => {
-    console.log(FakeData.carList);
 
     return (
         <div className="mx-24">
@@ -21,7 +20,10 @@ const MostSearchCar = () => {
                 <CarouselContent>
                     {FakeData.carList.slice(0, 6).map((car, index) => (
                         <CarouselItem key={index} className="basis-1/1 sm:basis-1/2 md:basis-1/3 ">
-                            <CarItems car={car}></CarItems>
+                            <CarItems car={{
+                                ...car,
+                                price: Number(car.price) // Ensure price is a number
+                            }} />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
