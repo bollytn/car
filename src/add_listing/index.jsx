@@ -16,6 +16,9 @@ import { db } from "./../../configs"
 import { CarListing } from "./../../configs/schema"
 import IconField from "./components/IconField"
 
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const AddListing = () => {
 
     const [formData, setFormData] = useState([])
@@ -39,18 +42,41 @@ const AddListing = () => {
 
             console.log(dataToInsert);
 
-
+            // Insert data into the database
             const response = await db.insert(CarListing).values(dataToInsert)
             if (response) {
+                toast.success('🦄 Data inserted successfully!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
                 console.log("Data inserted successfully");
             }
         } catch (error) {
+            toast.error(`🦄 Error: ${error.message}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
             console.error("Error", error);
         }
     }
 
     return (
         <div>
+            <ToastContainer /> {/* Ensure this is rendered */}
             <Header />
             <div className="px-10 md:px-20 my-10">
                 <h2 className="font-bold text-4xl">Add New Listing</h2>
