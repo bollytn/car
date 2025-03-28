@@ -65,6 +65,7 @@ const AddListing = () => {
                             ))}
                         </div>
                     </div>
+                    <Separator className="linear_line my-10" />
                     {/*car images */}
                     <div className="mt-10 flex justify-end">
                         <Button onClick={e => handleSubmit(e)}>Submit</Button>
