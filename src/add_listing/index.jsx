@@ -13,16 +13,22 @@ import CheckBoxField from "./components/CheckBoxField"
 import { Button } from "@/components/ui/button"
 
 const AddListing = () => {
+
     const [formData, setFormData] = useState([])
+
     const handleInputChange = (name, value) => {
         {/*setFormData(prevData => [...prevData, { name, value }])*/ }
         setFormData(prevData => ({
             ...prevData,
             [name]: value,
         }));
-        console.log(formData);
-
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    }
+
     return (
         <div>
             <Header />
@@ -61,7 +67,7 @@ const AddListing = () => {
                     </div>
                     {/*car images */}
                     <div className="mt-10 flex justify-end">
-                        <Button >Submit</Button>
+                        <Button onClick={e => handleSubmit(e)}>Submit</Button>
                     </div>
                 </form>
             </div>
