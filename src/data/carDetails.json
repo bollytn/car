@@ -200,7 +200,7 @@
       },
       {
         "label": "Listing Description",
-        "name": "listing Description",
+        "name": "listingDescription",
         "fieldType": "textarea",
         "required": true,
         "column": 2,

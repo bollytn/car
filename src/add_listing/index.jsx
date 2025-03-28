@@ -12,6 +12,10 @@ import features from "./../data/features.json"
 import CheckBoxField from "./components/CheckBoxField"
 import { Button } from "@/components/ui/button"
 
+import { db } from "./../../configs"
+import { CarListing } from "./../../configs/schema"
+import IconField from "./components/IconField"
+
 const AddListing = () => {
 
     const [formData, setFormData] = useState([])
@@ -24,9 +28,25 @@ const AddListing = () => {
         }));
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        try {
+            // Ensure 'type' is included in formData
+            const dataToInsert = {
+                ...formData,
+                type: formData.type || 'defaultType', // Replace 'defaultType' with an appropriate default value
+            };
+
+            console.log(dataToInsert);
+
+
+            const response = await db.insert(CarListing).values(dataToInsert)
+            if (response) {
+                console.log("Data inserted successfully");
+            }
+        } catch (error) {
+            console.error("Error", error);
+        }
     }
 
     return (
@@ -41,7 +61,11 @@ const AddListing = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {carDetails.carDetails.map((item, index) => (
                                 <div key={index}>
-                                    <label className="text-sm">{item?.label} {item.required && <span className="text-red-500">*</span>}</label>
+                                    <label className="text-sm flex gap-2 items-center mb-1">
+                                        <IconField icon={item.icon} />
+                                        {item?.label}
+                                        {item.required && <span className="text-red-500">*</span>}
+                                    </label>
                                     {(item.fieldType == 'text' || item.fieldType == 'number')
                                         ? <InputField item={item} handleInputChange={handleInputChange} />
                                         : item.fieldType == 'dropdown' ? <SelectField item={item} handleInputChange={handleInputChange} />

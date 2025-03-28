@@ -1,4 +1,5 @@
 import { Textarea } from "@/components/ui/textarea"
+
 import PropTypes from "prop-types"
 
 const TextAreaField = ({ item, handleInputChange }) => {
@@ -14,6 +15,7 @@ TextAreaField.propTypes = {
     item: PropTypes.shape({
         required: PropTypes.bool,
         name: PropTypes.string,
+        label: PropTypes.string,
     }),
     handleInputChange: PropTypes.func,
 }
