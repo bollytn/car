@@ -1,10 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox"
 import PropTypes from "prop-types"
 
-const CheckBoxField = ({ item, handleInputChange }) => {
+const CheckBoxField = ({ item, handleFeatureChange }) => {
     return (
         <div>
-            <Checkbox name={item.label} onCheckedChange={(value) => handleInputChange(item.label, value)} />
+            <Checkbox name={item.label} onCheckedChange={(value) => handleFeatureChange(item.label, value)} />
         </div>
     )
 }
@@ -12,7 +12,7 @@ CheckBoxField.propTypes = {
     item: PropTypes.shape({
         label: PropTypes.string,
     }).isRequired,
-    handleInputChange: PropTypes.func,
+    handleFeatureChange: PropTypes.func,
 }
 
 export default CheckBoxField

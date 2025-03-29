@@ -12,6 +12,7 @@
         "label": "Tagline",
         "name": "tagline",
         "fieldType": "text",
+        "required": false,
         "column": 2,
         "icon": "FaTag"
       },
@@ -19,6 +20,7 @@
         "label": "Original Price",
         "name": "originalPrice",
         "fieldType": "text",
+        "required" : false,
         "column": 1,
         "icon": "FaDollarSign"
       },
@@ -156,6 +158,7 @@
         "label": "Engine Size",
         "name": "engineSize",
         "fieldType": "text",
+        "required": false,
         "column": 1,
         "icon": "FaWrench"
       },
@@ -163,6 +166,7 @@
         "label": "Cylinder",
         "name": "cylinder",
         "fieldType": "number",
+        "required": false,
         "column": 1,
         "icon": "FaCircle"
       },
@@ -187,6 +191,7 @@
         "label": "VIN",
         "name": "vin",
         "fieldType": "text",
+        "required": false,
         "column": 1,
         "icon": "FaIdCard"
       },
@@ -194,6 +199,7 @@
         "label": "Offer Type",
         "name": "offerType",
         "fieldType": "dropdown",
+        "required": false,
         "options": ["Buy", "Hot Offer", "Sell", "Urgent"],
         "column": 2,
         "icon": "FaTags"
@@ -202,7 +208,7 @@
         "label": "Listing Description",
         "name": "listingDescription",
         "fieldType": "textarea",
-        "required": true,
+        "required": false,
         "column": 2,
         "icon": "FaFileAlt"
       }

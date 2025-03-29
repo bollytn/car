@@ -19,12 +19,19 @@ import IconField from "./components/IconField"
 import { Slide, ToastContainer, toast } from 'react-toastify';
 
 import { BadgeCheck, CircleAlert } from 'lucide-react';
+import { BiLoaderAlt } from "react-icons/bi"
 import UploadImages from "./components/UploadImages"
+
+import { useNavigate } from "react-router-dom"
+
 
 const AddListing = () => {
 
     const [formData, setFormData] = useState([])
+    const [selectedFeatures, setSelectedFeatures] = useState([])
     const [trigerUploadImages, setTrigerUploadImages] = useState(Number)
+    const [loader, setLoader] = useState(false)
+    const navigate = useNavigate()
 
     const handleInputChange = (name, value) => {
         {/*setFormData(prevData => [...prevData, { name, value }])*/ }
@@ -34,12 +41,22 @@ const AddListing = () => {
         }));
     }
 
+    const handleFeatureChange = (name, value) => {
+        setSelectedFeatures(prevData => ({
+            ...prevData,
+            [name]: value,
+        }));
+    }
+
     const handleSubmit = async (e) => {
+        setLoader(true)
+        console.log(loader);
         e.preventDefault();
         try {
             // Ensure 'type' is included in formData
             const dataToInsert = {
                 ...formData,
+                features: selectedFeatures,
                 type: formData.type || 'defaultType', // Replace 'defaultType' with an appropriate default value
             };
 
@@ -61,6 +78,7 @@ const AddListing = () => {
                     transition: Slide,
                 });
                 setTrigerUploadImages(response[0].id);
+                setLoader(false)
             }
         } catch (error) {
             toast.error(`Error: ${error.message}`, {
@@ -112,7 +130,7 @@ const AddListing = () => {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                             {features.features.map((item, index) => (
                                 <div key={index} className="flex items-center gap-2">
-                                    <CheckBoxField item={item} handleInputChange={handleInputChange} />
+                                    <CheckBoxField item={item} handleFeatureChange={handleFeatureChange} />
                                     <h2>{item.label}</h2>
                                 </div>
                             ))}
@@ -120,9 +138,16 @@ const AddListing = () => {
                     </div>
                     <Separator className="linear_line my-10" />
                     {/*car images */}
-                    <UploadImages trigerUploadImages={trigerUploadImages} />
+                    <UploadImages
+                        trigerUploadImages={trigerUploadImages}
+                        setLoader={
+                            (v) => { setLoader(v); navigate('/profile') }} />
                     <div className="mt-10 flex justify-end">
-                        <Button onClick={e => handleSubmit(e)}>Submit</Button>
+                        <Button
+                            disabled={loader}
+                            onClick={e => handleSubmit(e)}>
+                            {!loader ? 'Submit' : <>Loading < BiLoaderAlt /></>}
+                        </Button>
                     </div>
                 </form>
             </div>

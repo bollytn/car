@@ -12,7 +12,7 @@ import { IoMdCloseCircle } from "react-icons/io"
 import { ToastContainer, toast, Slide } from 'react-toastify';
 
 
-const UploadImages = ({ trigerUploadImages }) => {
+const UploadImages = ({ trigerUploadImages, setLoader }) => {
 
     const [selectFieldList, setSelectFieldList] = useState([])
 
@@ -37,32 +37,32 @@ const UploadImages = ({ trigerUploadImages }) => {
         setSelectFieldList(updatedList);
     }
 
-    const uploadImagesToServer = () => {
+    const uploadImagesToServer = async () => {
+        setLoader(true)
         selectFieldList.forEach((file) => {
             const fileName = Date.now() + 'jpeg';
             const storageRef = ref(storage, 'car-market/' + fileName);
             const metaData = { contentType: 'image/png' };
-            uploadBytes(storageRef, file, metaData)
-                .then((snapshot) => {
-                    toast.success('File uploaded successfully:', snapshot.ref.fullPath, {
-                        position: "top-left",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: false,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Slide,
-                    });
-                }).then(resp => {
-                    getDownloadURL(storageRef, resp).then(async (downloadUrl) => {
-                        console.log(downloadUrl);
-                        await db.insert(CarImages).values({
-                            carListingId: trigerUploadImages, imageUrl: downloadUrl
-                        })
+            uploadBytes(storageRef, file, metaData).then((snapshot) => {
+                toast.success('File uploaded successfully:', snapshot.ref.fullPath, {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
+            }).then(resp => {
+                getDownloadURL(storageRef, resp).then(async (downloadUrl) => {
+                    console.log(downloadUrl);
+                    await db.insert(CarImages).values({
+                        carListingId: trigerUploadImages, imageUrl: downloadUrl
                     })
                 })
+            })
                 .catch((error) => {
                     toast.error('Error uploading file:', error.message, {
                         position: "top-left",
@@ -76,6 +76,7 @@ const UploadImages = ({ trigerUploadImages }) => {
                         transition: Slide,
                     });
                 });
+            setLoader(false)
         });
     };
 
@@ -110,7 +111,8 @@ const UploadImages = ({ trigerUploadImages }) => {
 }
 
 UploadImages.propTypes = {
-    trigerUploadImages: PropTypes.bool
+    trigerUploadImages: PropTypes.bool,
+    setLoader: PropTypes.func
 }
 
 export default UploadImages
