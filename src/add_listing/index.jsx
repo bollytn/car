@@ -16,12 +16,15 @@ import { db } from "./../../configs"
 import { CarListing } from "./../../configs/schema"
 import IconField from "./components/IconField"
 
-import { Bounce, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+
+import { BadgeCheck, CircleAlert } from 'lucide-react';
+import UploadImages from "./components/UploadImages"
 
 const AddListing = () => {
 
     const [formData, setFormData] = useState([])
+    const [trigerUploadImages, setTrigerUploadImages] = useState(Number)
 
     const handleInputChange = (name, value) => {
         {/*setFormData(prevData => [...prevData, { name, value }])*/ }
@@ -43,9 +46,10 @@ const AddListing = () => {
             console.log(dataToInsert);
 
             // Insert data into the database
-            const response = await db.insert(CarListing).values(dataToInsert)
+            const response = await db.insert(CarListing).values(dataToInsert).returning({ id: CarListing.id })
             if (response) {
-                toast.success('🦄 Data inserted successfully!', {
+                toast.success('Data inserted successfully!', {
+                    icon: <BadgeCheck className="text-green-500" />,
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -54,12 +58,13 @@ const AddListing = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                    transition: Bounce,
+                    transition: Slide,
                 });
-                console.log("Data inserted successfully");
+                setTrigerUploadImages(response[0].id);
             }
         } catch (error) {
-            toast.error(`🦄 Error: ${error.message}`, {
+            toast.error(`Error: ${error.message}`, {
+                icon: <CircleAlert className="text-red-500" />,
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -68,9 +73,8 @@ const AddListing = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                transition: Bounce,
+                transition: Slide,
             });
-            console.error("Error", error);
         }
     }
 
@@ -98,8 +102,7 @@ const AddListing = () => {
                                             : item.fieldType == 'textarea' ? <TextAreaField item={item} handleInputChange={handleInputChange} />
                                                 : null}
                                 </div>
-                            ))
-                            }
+                            ))}
                         </div>
                     </div>
                     <Separator className="linear_line my-10" />
@@ -117,6 +120,7 @@ const AddListing = () => {
                     </div>
                     <Separator className="linear_line my-10" />
                     {/*car images */}
+                    <UploadImages trigerUploadImages={trigerUploadImages} />
                     <div className="mt-10 flex justify-end">
                         <Button onClick={e => handleSubmit(e)}>Submit</Button>
                     </div>
