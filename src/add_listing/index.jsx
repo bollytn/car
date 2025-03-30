@@ -31,7 +31,7 @@ const AddListing = () => {
 
     const [formData, setFormData] = useState([])
     const [selectedFeatures, setSelectedFeatures] = useState([])
-    const [trigerUploadImages, setTrigerUploadImages] = useState(Number)
+    const [trigerUploadImages, setTrigerUploadImages] = useState(null)
     const [loader, setLoader] = useState(false)
     const navigate = useNavigate()
     const { user } = useUser()
@@ -52,7 +52,7 @@ const AddListing = () => {
     }
 
     const handleSubmit = async (e) => {
-        setLoader(true)
+        setLoader(true);
         console.log(loader);
         e.preventDefault();
         try {
@@ -83,7 +83,6 @@ const AddListing = () => {
                     transition: Slide,
                 });
                 setTrigerUploadImages(response[0].id);
-                setLoader(false)
             }
         } catch (error) {
             toast.error(`Error: ${error.message}`, {
@@ -98,6 +97,7 @@ const AddListing = () => {
                 theme: "light",
                 transition: Slide,
             });
+            setLoader(false);
         }
     }
 
@@ -145,8 +145,9 @@ const AddListing = () => {
                     {/*car images */}
                     <UploadImages
                         trigerUploadImages={trigerUploadImages}
-                        setLoader={
-                            (v) => { setLoader(v); navigate('/profile') }} />
+                        setLoader={setLoader}
+                        navigate={navigate}
+                    />
                     <div className="mt-10 flex justify-end">
                         <Button
                             disabled={loader}

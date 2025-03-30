@@ -1,28 +1,47 @@
-import { useEffect, useState } from "react"
-import PropTypes from "prop-types"
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-import { uploadBytes, ref, getDownloadURL } from "firebase/storage"
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
-import { storage } from "../../../configs/firebaseConfig"
-import { db } from "/configs"
-import { CarImages } from "../../../configs/schema"
+import { storage } from "../../../configs/firebaseConfig";
+import { db } from "/configs";
+import { CarImages } from "../../../configs/schema";
 
-import { IoMdCloseCircle } from "react-icons/io"
+import { IoMdCloseCircle } from "react-icons/io";
 
 import { ToastContainer, toast, Slide } from 'react-toastify';
 
 
-const UploadImages = ({ trigerUploadImages, setLoader }) => {
+const UploadImages = ({ trigerUploadImages, setLoader, navigate }) => {
 
     const [selectFieldList, setSelectFieldList] = useState([])
+    const [success, setSuccess] = useState(false); // New state variable
 
     useEffect(() => {
         if (trigerUploadImages) {
-            uploadImagesToServer()
+            uploadImagesToServer();
         }
-    }, [trigerUploadImages])
+    }, [trigerUploadImages]);
 
-
+    useEffect(() => {
+        if (success) {
+            toast.success('Images uploaded successfully!', {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            setTimeout(() => {
+                navigate('/profile');
+                setLoader(false);
+            }, 5000); // Wait for 5 seconds (same as toast duration)
+        }
+    }, [success, navigate, setLoader]);
 
     const onFileSelected = (event) => {
         const files = event.target.files;
@@ -38,13 +57,22 @@ const UploadImages = ({ trigerUploadImages, setLoader }) => {
     }
 
     const uploadImagesToServer = async () => {
-        setLoader(true)
-        selectFieldList.forEach((file) => {
-            const fileName = Date.now() + 'jpeg';
-            const storageRef = ref(storage, 'car-market/' + fileName);
-            const metaData = { contentType: 'image/png' };
-            uploadBytes(storageRef, file, metaData).then((snapshot) => {
-                toast.success('File uploaded successfully:', snapshot.ref.fullPath, {
+        setLoader(true);
+        try {
+            for (const file of selectFieldList) {
+                const fileName = Date.now() + "-" + file.name;
+                const storageRef = ref(storage, "car-market/" + fileName);
+                const metaData = { contentType: file.type };
+
+                await uploadBytes(storageRef, file, metaData);
+                const downloadUrl = await getDownloadURL(storageRef);
+
+                await db.insert(CarImages).values({
+                    carListingId: trigerUploadImages,
+                    imageUrl: downloadUrl,
+                });
+
+                toast.success(`File ${file.name} uploaded successfully!`, {
                     position: "top-left",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -55,29 +83,23 @@ const UploadImages = ({ trigerUploadImages, setLoader }) => {
                     theme: "light",
                     transition: Slide,
                 });
-            }).then(resp => {
-                getDownloadURL(storageRef, resp).then(async (downloadUrl) => {
-                    console.log(downloadUrl);
-                    await db.insert(CarImages).values({
-                        carListingId: trigerUploadImages, imageUrl: downloadUrl
-                    })
-                })
-            })
-                .catch((error) => {
-                    toast.error('Error uploading file:', error.message, {
-                        position: "top-left",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: false,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Slide,
-                    });
-                });
-            setLoader(false)
-        });
+            }
+            setSelectFieldList([]); // Clear the list after successful upload
+            setSuccess(true); // Set success to true after successful upload
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            toast.error(`Error uploading file: ${error.message}`, {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+        }
     };
 
     return (
@@ -111,8 +133,9 @@ const UploadImages = ({ trigerUploadImages, setLoader }) => {
 }
 
 UploadImages.propTypes = {
-    trigerUploadImages: PropTypes.bool,
-    setLoader: PropTypes.func
+    trigerUploadImages: PropTypes.number,
+    setLoader: PropTypes.func,
+    navigate: PropTypes.func,
 }
 
 export default UploadImages
