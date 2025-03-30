@@ -1,6 +1,4 @@
 import Header from "@/components/Header"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
 import MyListing from "./components/MyListing"
 
 const Profile = () => {

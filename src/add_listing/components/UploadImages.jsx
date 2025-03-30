@@ -71,21 +71,11 @@ const UploadImages = ({ trigerUploadImages, setLoader, navigate }) => {
                     carListingId: trigerUploadImages,
                     imageUrl: downloadUrl,
                 });
-
-                toast.success(`File ${file.name} uploaded successfully!`, {
-                    position: "top-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    transition: Slide,
-                });
             }
+
             setSelectFieldList([]); // Clear the list after successful upload
             setSuccess(true); // Set success to true after successful upload
+
         } catch (error) {
             console.error("Error uploading file:", error);
             toast.error(`Error uploading file: ${error.message}`, {
