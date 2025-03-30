@@ -25,7 +25,7 @@ const Profile = () => {
         active: {
             scale: 1.1,
             backgroundColor: "#0463CD", // Replace with your primary color
-            color: "white",
+            color: "#ffffff", // Replace with your text color
             boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.3)",
             transition: { duration: 0.2 },
         },
@@ -49,7 +49,7 @@ const Profile = () => {
                                 whileTap="active"
                                 className="rounded-xl"
                             >
-                                <TabsTrigger value="myListing">My Listing</TabsTrigger>
+                                <TabsTrigger value="myListing" className=" rounded-xl">My Listing</TabsTrigger>
                             </motion.div>
                             <motion.div
                                 variants={tabVariants}
@@ -57,7 +57,7 @@ const Profile = () => {
                                 whileTap="active"
                                 className="rounded-xl"
                             >
-                                <TabsTrigger value="inbox">Inbox</TabsTrigger>
+                                <TabsTrigger value="inbox" className=" rounded-xl">Inbox</TabsTrigger>
                             </motion.div>
                             <motion.div
                                 variants={tabVariants}
@@ -65,7 +65,7 @@ const Profile = () => {
                                 whileTap="active"
                                 className="rounded-xl"
                             >
-                                <TabsTrigger value="profile">Profile</TabsTrigger>
+                                <TabsTrigger value="profile" className=" rounded-xl">Profile</TabsTrigger>
                             </motion.div>
                         </TabsList>
                     </motion.div>
