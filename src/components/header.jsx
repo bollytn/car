@@ -2,9 +2,13 @@ import { UserButton, useUser } from '@clerk/clerk-react'
 import { Button } from './ui/button'
 import { Link } from 'react-router-dom';
 
+import { SignInButton } from '@clerk/clerk-react'
+
 const Header = () => {
 
     const { user, isSignedIn } = useUser()
+    console.log(user);
+
 
     return (
         <div className="flex justify-between items-center p-5 shadow-sm">
@@ -17,7 +21,8 @@ const Header = () => {
                 <li className='font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary'>Preowned</li>
             </ul>
 
-            {isSignedIn ?
+            {isSignedIn
+                ?
                 <div className='flex items-center gap-4'>
                     <UserButton />
                     <Link to='/profile'>
@@ -26,7 +31,9 @@ const Header = () => {
 
                 </div>
                 :
-                <Button className="linear"> Sign in </Button>
+                <SignInButton mode='modal' forceRedirectUrl='/'>
+                    <Button className="linear"> Sign in </Button>
+                </SignInButton>
             }
         </div>
     )

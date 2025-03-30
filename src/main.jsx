@@ -9,6 +9,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ClerkProvider } from '@clerk/clerk-react'
 
+
 const router = createBrowserRouter([
   {
     path: '/',

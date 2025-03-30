@@ -23,7 +23,9 @@ import { BiLoaderAlt } from "react-icons/bi"
 import UploadImages from "./components/UploadImages"
 
 import { useNavigate } from "react-router-dom"
+import { useUser } from "@clerk/clerk-react"
 
+import moment from "moment"
 
 const AddListing = () => {
 
@@ -32,6 +34,7 @@ const AddListing = () => {
     const [trigerUploadImages, setTrigerUploadImages] = useState(Number)
     const [loader, setLoader] = useState(false)
     const navigate = useNavigate()
+    const { user } = useUser()
 
     const handleInputChange = (name, value) => {
         {/*setFormData(prevData => [...prevData, { name, value }])*/ }
@@ -57,6 +60,8 @@ const AddListing = () => {
             const dataToInsert = {
                 ...formData,
                 features: selectedFeatures,
+                createdBy: user?.primaryEmailAddress?.emailAddress,
+                postedOn: moment().format('YYYY-MM-DD HH:mm:ss'),
                 type: formData.type || 'defaultType', // Replace 'defaultType' with an appropriate default value
             };
 
